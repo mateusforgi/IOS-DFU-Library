@@ -31,7 +31,9 @@ let package = Package(
     ),
     .target(
       name: "NordicDFUDynamic",
-      dependencies: ["ZIPFoundationDynamic"],
+      dependencies: [
+          .product(name: "ZIPFoundationDynamic", package: "ZIPFoundation")
+      ],
       path: "iOSDFULibrary/Classes/"
     ),
     // FIXME: Exclude this target for `watchOS` Simulator, because it fails to
