@@ -14,7 +14,7 @@ let package = Package(
   ],
   products: [
     .library(name: "NordicDFU", targets: ["NordicDFU"]),
-    .library(name: "NordicDFUDynamic", type: .dynamic, targets: ["NordicDFU"])
+    .library(name: "NordicDFUDynamic", type: .dynamic, targets: ["NordicDFUDynamic"])
   ],
   dependencies: [
     .package(
@@ -24,9 +24,18 @@ let package = Package(
   ],
   targets: [
     .target(
-      name: "NordicDFU",
-      dependencies: ["ZIPFoundationDynamic"],
+      name: "NordicDFUInternal",
       path: "iOSDFULibrary/Classes/"
+    ),
+    .target(
+      name: "NordicDFU",
+      dependencies: ["NordicDFUInternal", "ZIPFoundation"],
+      path: "NordicDFU/"
+    ),
+    .target(
+      name: "NordicDFUDynamic",
+      dependencies: ["NordicDFUInternal", "ZIPFoundationDynamic"],
+      path: "NordicDFUDynamic/"
     ),
     .target(
       name: "ZIPFoundationDynamic",
