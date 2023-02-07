@@ -28,7 +28,7 @@ let package = Package(
       name: "NordicDFU",
       dependencies: [
           .product(name: "ZIPFoundationDynamic", package: "ZIPFoundation")
-      ]
+      ],
       path: "iOSDFULibrary/Classes/"
     ),
     // FIXME: Exclude this target for `watchOS` Simulator, because it fails to
