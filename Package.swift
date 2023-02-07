@@ -14,7 +14,8 @@ let package = Package(
     .tvOS(.v11)
   ],
   products: [
-    .library(name: "NordicDFU", type: .dynamic, targets: ["NordicDFU"])
+    .library(name: "NordicDFU", targets: ["NordicDFU"]),
+    .library(name: "NordicDFUDynamic", type: .dynamic, targets: ["NordicDFUDynamic"])
   ],
   dependencies: [
     .package(
@@ -26,6 +27,11 @@ let package = Package(
     .target(
       name: "NordicDFU",
       dependencies: ["ZIPFoundation"],
+      path: "iOSDFULibrary/Classes/"
+    ),
+    .target(
+      name: "NordicDFUDynamic",
+      dependencies: ["ZIPFoundationDynamic"],
       path: "iOSDFULibrary/Classes/"
     ),
     // FIXME: Exclude this target for `watchOS` Simulator, because it fails to
