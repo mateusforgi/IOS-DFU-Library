@@ -14,7 +14,8 @@ let package = Package(
     .tvOS(.v11)
   ],
   products: [
-    .library(name: "NordicDFU", type: .dynamic, targets: ["NordicDFU"])
+    .library(name: "NordicDFU", type: .static, targets: ["NordicDFU"]),
+    .library(name: "NordicDFUDynamic", type: .dynamic, targets: ["NordicDFU"])
   ],
   dependencies: [
     .package(
