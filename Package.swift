@@ -15,7 +15,7 @@ let package = Package(
   ],
   products: [
     .library(name: "NordicDFU", targets: ["NordicDFU"]),
-    .library(name: "NordicDFUDynamic", type: .dynamic, targets: ["NordicDFUDynamic"])
+    .library(name: "NordicDFUDynamic", type: .dynamic, targets: ["NordicDFU"])
   ],
   dependencies: [
     .package(
