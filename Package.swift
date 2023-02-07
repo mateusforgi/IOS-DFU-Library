@@ -20,7 +20,7 @@ let package = Package(
   dependencies: [
     .package(
       url: "https://github.com/mateusforgi/ZIPFoundation",
-      branch: "development"
+      revision: "d231a24b468f8cbb071f3f01c3f06449236e1d92"
     )
   ],
   targets: [
