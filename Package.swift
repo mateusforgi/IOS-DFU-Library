@@ -1,8 +1,3 @@
-// swift-tools-version:5.5
-//
-// The `swift-tools-version` declares the minimum version of Swift required to
-// build this package. Do not remove it.
-
 import PackageDescription
 
 let package = Package(
@@ -14,19 +9,18 @@ let package = Package(
     .tvOS(.v11)
   ],
   products: [
-    .library(name: "NordicDFU", type: .dynamic, targets: ["NordicDFU"]),
-    .library(name: "NordicDFUStatic", type: .static, targets: ["NordicDFU"])
+    .library(name: "NordicDFU", type: .dynamic, targets: ["NordicDFU"])
   ],
   dependencies: [
     .package(
       url: "https://github.com/mateusforgi/ZIPFoundation",
-      revision: "c250f5ab6040a77c947ebaa87e43cf102a0f86db"
+      revision: "e71588939c0875c428374d9b064b3ea801fe95a0"
     )
   ],
   targets: [
     .target(
       name: "NordicDFU",
-      dependencies: ["ZIPFoundation"],      
+      dependencies: [.product(name: "ZIPFoundationDynamic", package: "ZIPFoundation")],
       path: "iOSDFULibrary/Classes/"
     ),
     // FIXME: Exclude this target for `watchOS` Simulator, because it fails to
