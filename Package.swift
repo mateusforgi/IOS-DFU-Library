@@ -14,18 +14,18 @@ let package = Package(
     .tvOS(.v11)
   ],
   products: [
-    .library(name: "NordicDFU", targets: ["NordicDFU"])
+    .library(name: "NordicDFU", type: .dynamic, targets: ["NordicDFU"]),
   ],
   dependencies: [
     .package(
-      url: "https://github.com/weichsel/ZIPFoundation",
-      .exact("0.9.11")
+      url: "https://github.com/mateusforgi/ZIPFoundation",
+      revision: "e71588939c0875c428374d9b064b3ea801fe95a0"
     )
   ],
   targets: [
     .target(
       name: "NordicDFU",
-      dependencies: ["ZIPFoundation"],
+      dependencies: [.product(name: "ZIPFoundationDynamic", package: "ZIPFoundation")],
       path: "iOSDFULibrary/Classes/"
     ),
     // FIXME: Exclude this target for `watchOS` Simulator, because it fails to
