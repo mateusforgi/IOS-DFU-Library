@@ -4,6 +4,13 @@
 // build this package. Do not remove it.
 
 import PackageDescription
+import Foundation
+
+let dynamicLink = ProcessInfo.processInfo.environment["dynamic_lib"] == "1"
+
+let targetDependencies: [Target.Dependency] = dynamicLink
+    ? [.product(name: "ZIPFoundationDynamic", package: "ZIPFoundation")]
+    : [.product(name: "ZIPFoundation", package: "ZIPFoundation")]
 
 let package = Package(
   name: "NordicDFU",
@@ -15,7 +22,7 @@ let package = Package(
   ],
   products: [
     .library(name: "NordicDFU", targets: ["NordicDFU"]),
-    .library(name: "NordicDFUDynamic", type: .dynamic, targets: ["NordicDFUDynamic"])
+    .library(name: "NordicDFUDynamic", type: .dynamic, targets: ["NordicDFU"])
   ],
   dependencies: [
     .package(
@@ -25,20 +32,9 @@ let package = Package(
   ],
   targets: [
     .target(
-      name: "NordicDFUInternal",
-      path: "iOSDFULibrary/Classes/"
-    ),
-    .target(
       name: "NordicDFU",
-      dependencies: ["NordicDFUInternal", "ZIPFoundation"],
-      path: "NordicDFU/"
-    ),
-    .target(
-      name: "NordicDFUDynamic",
-      dependencies: ["NordicDFUInternal",
-                     .product(name:  "ZIPFoundationDynamic", package: "ZIPFoundation")
-      ],
-      path: "NordicDFUDynamic/"
+      dependencies: targetDependencies,
+      path: "iOSDFULibrary/Classes/"
     ),
     // FIXME: Exclude this target for `watchOS` Simulator, because it fails to
     // compile in Xcode.
